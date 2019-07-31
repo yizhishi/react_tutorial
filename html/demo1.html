@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="example"></div>
+
+    script 的type 不是text/script了, 而是text/babel(JSX)
+    <script type="text/babel">
+    // const element = <h1>Hello, world!</h1>;
+
+    class MyElement extends React.Component{
+        render() {
+            return <a href = {this.props.href}>href, {new Date().toLocaleTimeString()}.</a>
+        }
+    }//= <a href = {this.props.href}></a>
+
+    function tick() {
+        ReactDOM.render(
+            // <h1> hello, world</h1>, 
+            <MyElement href="http://www.baidu.com" />,
+            document.getElementById('example')
+        );
+    }
+    setInterval(tick, 1000)
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+const comment = {
+    date: new Date(),
+    text: 'I hope you enjoy learning React!',
+    author: {
+        name: 'Hello Kitty',
+        avatarUrl: 'https://placekitten.com/g/64/64',
+    },
+}
+
+// 一个复杂的组件, 也没有多难以维护~
+function Comment_complex(props) {
+    return (
+        <div className="Comment">
+            <div className="UserInfo">
+                <img className="Avatar"
+                src={props.author.avatarUrl}
+                alt={props.author.name}
+                />
+                <div className="UserInfo-name">
+                    {props.author.name}
+                </div>
+            </div>
+            <div className="Comment-text">
+                {props.text}
+            </div>
+            <div className="Comment-date">
+                {props.date.toLocaleDateString()}
+            </div>
+        </div>
+    )
+}
+
+// 最初看上去，提取组件可能是一件繁重的工作，但是，在大型应用中，构建可复用组件库是完全值得的。
+// 根据经验来看，如果 UI 中有一部分被多次使用（Button，Panel，Avatar），或者组件本身就足够复杂（App，FeedStory，Comment），那么它就是一个可复用组件的候选项。
+function Comment_refine(props) {
+    return (
+        <div className="Comment">
+            <Comment_UserInfo author={props.author} />
+            <Comment_Text text={props.text} />
+            <Comment_Date date={props.date} />
+        </div>
+    )
+}
+function Comment_UserInfo(props) {
+    return (
+        <div className="UserInfo">
+            <Avatar user={props.author} />
+            <div className="UserInfo-name">
+                {props.author.name}
+            </div>
+        </div>    
+    )
+}
+function Avatar(props) {
+    return (
+        <img className="Avatar"
+            src={props.user.avatarUrl}
+            alt={props.user.name}
+        />
+    )
+}
+function Comment_Text(props) {
+    return (
+        <div className="Comment-text">
+            {props.text}
+        </div>
+    )
+}
+function Comment_Date(props) {
+    return (
+        <div className="Comment-date">
+            {props.date.toLocaleDateString()}
+        </div>
+    )
+}
+ReactDOM.render(
+    // <Comment_complex date={comment.date} author={comment.author} text={comment.text} />,
+    <Comment_refine date={comment.date} author={comment.author} text={comment.text} />,
+    document.getElementById("example")
+)
+
+</script>
+
+</body>
+
+</html>

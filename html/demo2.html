@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="example"></div>
+    JSX遇见<></>作html解析, 遇见{}代码块做javascript解析
+    <script type="text/babel">
+
+var names = ['a', 'b', 'c']
+var arr= [<h1> hello </h1>, <h2> world </h2>]
+
+class MyDiv extends React.Component{
+    render() {
+        return (
+            <div className='render-outer'>
+                {arr}
+                <p>
+                    <a href="https://blog.csdn.net/juzipchy/article/details/74834973">
+                        Each child in an array or iterator should have a unique "key" prop.
+                    </a>
+                </p>
+
+                {  
+                    names.map(function(name) {
+                        return (
+                            <div key={name} className='render-inner'>
+                                hello {name} !
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <MyDiv />,
+    document.getElementById('example')
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="example"></div>
+
+    <script type="text/babel">
+
+// Before v16.0, React use React.createClass() to create a component class. It has been deprecated
+/*
+var MyComponent = React.createClass({
+    render: function() {
+        return <h1> my component, {this.props.name} <h1>
+    }
+})
+
+class MyComponent extends React.Component{
+    render() {
+        // 只能有1个top标签
+        return <h1> my component, {this.props.name} </h1>
+    }
+}
+*/
+// 与ES6的class写法等效
+function MyComponent(props) {
+    return <h1> my component, {props.name} </h1>
+}
+
+const element = <MyComponent name='Sara' />
+
+// 组件组合
+function App() {
+    return (
+        <div>
+            <MyComponent name='Allen' />
+            <MyComponent name='Bob' />
+        </div>
+    )
+}
+
+ReactDOM.render(
+    // <MyComponent name='Zara'/>
+    // element
+    <App/>
+    ,
+    document.getElementById('example')
+);
+
+</script>
+
+</body>
+
+</html>
